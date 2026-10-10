@@ -1,0 +1,63 @@
+rules_version = '2';
+
+// ランナーズ・ライブ用のセキュリティルール
+// ・匿名ログインした人だけが読み書きできる
+// ・ルームコードを知っている人だけがそのルームのデータにたどり着ける（ルーム一覧を取る手段はない）
+// ・自分のメンバー情報・自分の投稿だけを書き換え／削除できる
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+    function validRoom(room) { return room.matches('^[a-z0-9_-]{4,32}$'); }
+
+    match /rooms/{room} {
+      // メンバー（現在地・状態）
+      match /members/{uid} {
+        allow get, list: if signedIn() && validRoom(room);
+        allow create, update: if isOwner(uid) && validRoom(room)
+          && request.resource.data.name is string
+          && request.resource.data.name.size() > 0
+          && request.resource.data.name.size() <= 20
+          && request.resource.data.status in ['running', 'resting', 'help', 'retired', 'finished']
+          && request.resource.data.keys().hasOnly(
+               ['name', 'color', 'status', 'lat', 'lng', 'acc', 'posAt', 'km', 'batt', 'updatedAt']);
+        allow delete: if isOwner(uid);
+      }
+
+      // チャット（文字・写真の縮小版・要サポート通知）
+      match /messages/{id} {
+        allow get, list: if signedIn() && validRoom(room);
+        allow create: if signedIn() && validRoom(room)
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.type in ['text', 'photo', 'alert', 'system']
+          && request.resource.data.name is string && request.resource.data.name.size() <= 20
+          && (!('text' in request.resource.data) || request.resource.data.text.size() <= 500)
+          && (!('thumb' in request.resource.data) || request.resource.data.thumb.size() <= 60000)
+          && request.resource.data.keys().hasOnly(
+               ['type', 'uid', 'name', 'text', 'thumb', 'photoId', 'lat', 'lng', 'clientAt', 'createdAt']);
+        allow update: if false;
+        allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      }
+
+      // 写真本体（圧縮済み）
+      match /photos/{id} {
+        allow get: if signedIn() && validRoom(room);
+        allow list: if false;
+        allow create: if signedIn() && validRoom(room)
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.data is string
+          && request.resource.data.data.size() <= 900000;
+        allow update: if false;
+        allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      }
+
+      // コース（GPX）。ルーム内の誰でも登録・削除できる
+      match /meta/{docId} {
+        allow get, list: if signedIn() && validRoom(room);
+        allow write: if signedIn() && validRoom(room) && docId == 'course'
+          && (request.resource == null
+              || (request.resource.data.pts is string && request.resource.data.pts.size() <= 400000));
+      }
+    }
+  }
+}
