@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rinen Studio</title>
+<meta name="description" content="Rinen Studio turns your mission, values and founder story into Japanese-style manga for onboarding and culture training.">
+<meta property="og:title" content="Rinen Studio — Your company philosophy, as manga">
+<meta property="og:description" content="Japanese-style manga that helps employees understand, remember and talk about your values.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  /* ==== Replace these two links before publishing ==== */
+  /* FORM_URL  : your external form (Google Forms, Tally, etc.) */
+  /* KINDLE_URL: your Kindle author page or a sample book      */
+
+  :root {
+    --bg: #fbf8f3;
+    --surface: #ffffff;
+    --ink: #141414;
+    --muted: #5b5b5b;
+    --line: #141414;
+    --accent: #d7263d;
+    --accent-ink: #ffffff;
+    --soft: #f1ebe1;
+    --tone: radial-gradient(#14141422 1px, transparent 1.2px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121212;
+      --surface: #1c1c1c;
+      --ink: #f2efe9;
+      --muted: #b4b0a8;
+      --line: #f2efe9;
+      --accent: #ff4d5e;
+      --accent-ink: #121212;
+      --soft: #24221f;
+      --tone: radial-gradient(#f2efe922 1px, transparent 1.2px);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121212;
+    --surface: #1c1c1c;
+    --ink: #f2efe9;
+    --muted: #b4b0a8;
+    --line: #f2efe9;
+    --accent: #ff4d5e;
+    --accent-ink: #121212;
+    --soft: #24221f;
+    --tone: radial-gradient(#f2efe922 1px, transparent 1.2px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 17px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  .display { font-family: Bangers, Impact, sans-serif; letter-spacing: .02em; font-weight: 400; }
+
+  /* Header */
+  header { border-bottom: 3px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-size: 28px; text-decoration: none; }
+  .logo span { color: var(--accent); }
+  nav a { margin-left: 20px; text-decoration: none; font-weight: 600; font-size: 15px; }
+  nav a:hover { color: var(--accent); }
+  @media (max-width: 720px) { nav a:not(.btn) { display: none; } }
+
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    border: 3px solid var(--line); padding: 12px 22px; font-weight: 800; text-decoration: none;
+    box-shadow: 4px 4px 0 var(--line); transition: transform .1s, box-shadow .1s;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--line); }
+  nav .btn { padding: 8px 14px; box-shadow: 3px 3px 0 var(--line); }
+  .btn.ghost { background: var(--surface); color: var(--ink); }
+
+  /* Hero: manga page layout */
+  .hero { padding: 56px 0 48px; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .kicker { display: inline-block; border: 2px solid var(--line); padding: 2px 10px; font-weight: 700; font-size: 14px; background: var(--surface); }
+  h1 { font-size: clamp(44px, 7vw, 76px); line-height: .98; margin: 16px 0; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { font-size: 19px; color: var(--muted); max-width: 34em; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+
+  .page {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 150px 190px 130px; gap: 10px;
+    border: 3px solid var(--line); padding: 10px; background: var(--surface); transform: rotate(1.2deg);
+    box-shadow: 8px 8px 0 var(--line);
+  }
+  .panel { border: 3px solid var(--line); position: relative; overflow: hidden; background: var(--surface); padding: 12px; }
+  .panel.tone { background-image: var(--tone); background-size: 6px 6px; }
+  .p1 { grid-column: 1 / 3; }
+  .p4 { grid-column: 1 / 3; }
+  .bubble {
+    background: var(--surface); border: 2.5px solid var(--line); border-radius: 50% / 45%;
+    padding: 10px 16px; font-weight: 700; font-size: 14px; line-height: 1.3; display: inline-block; max-width: 85%;
+    position: relative;
+  }
+  .bubble::after {
+    content: ""; position: absolute; bottom: -12px; left: 28px; width: 18px; height: 14px;
+    background: var(--surface); border-right: 2.5px solid var(--line); border-bottom: 2.5px solid var(--line);
+    transform: skewX(-35deg) rotate(10deg);
+  }
+  .caption { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--bg); font-size: 12px; font-weight: 700; padding: 3px 8px; }
+  .sfx { position: absolute; right: 10px; bottom: 6px; font-size: 40px; color: var(--accent); transform: rotate(-8deg); }
+  .speed { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 70% 60%, var(--soft) 0 4deg, transparent 4deg 9deg); opacity: .9; }
+  .p3 .bubble, .p4 .bubble { position: relative; z-index: 1; }
+  .p3 { display: flex; align-items: flex-end; }
+  .p4 { display: flex; align-items: center; justify-content: center; text-align: center; }
+  .p4 strong { font-size: 24px; position: relative; z-index: 1; }
+
+  /* Sections */
+  section { padding: 64px 0; }
+  section.alt { background: var(--soft); border-top: 3px solid var(--line); border-bottom: 3px solid var(--line); }
+  h2 { font-size: clamp(34px, 5vw, 50px); line-height: 1; margin: 0 0 12px; }
+  .sub { color: var(--muted); max-width: 40em; margin: 0 0 32px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 3px solid var(--line); padding: 22px; box-shadow: 5px 5px 0 var(--line); }
+  .stat { font-size: 64px; line-height: 1; color: var(--accent); }
+  .card p { margin: 10px 0 0; }
+  .src { font-size: 13px; color: var(--muted); margin-top: 10px; display: block; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  .two ul { padding-left: 20px; margin: 0; }
+  .two li { margin-bottom: 10px; }
+
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: s; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+  .step { counter-increment: s; }
+  .step::before { content: counter(s); font-family: Bangers, Impact, sans-serif; font-size: 44px; color: var(--accent); line-height: 1; display: block; }
+  .step h3 { margin: 6px 0 6px; font-size: 19px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 860px) { .plans { grid-template-columns: 1fr; } }
+  .plan { display: flex; flex-direction: column; }
+  .plan.featured { border-color: var(--accent); box-shadow: 8px 8px 0 var(--accent); }
+  .plan .tag { align-self: flex-start; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 800; padding: 2px 8px; margin-bottom: 8px; }
+  .plan h3 { margin: 0; font-size: 22px; }
+  .price { font-size: 46px; margin: 8px 0 2px; }
+  .price small { font-family: Inter, sans-serif; font-size: 14px; color: var(--muted); }
+  .plan ul { padding-left: 20px; margin: 14px 0 20px; flex: 1; }
+  .plan li { margin-bottom: 6px; font-size: 15px; }
+  .note { font-size: 14px; color: var(--muted); margin-top: 18px; }
+
+  .portfolio { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: center; }
+  @media (max-width: 760px) { .portfolio { grid-template-columns: 1fr; } }
+
+  details { background: var(--surface); border: 3px solid var(--line); padding: 16px 20px; margin-bottom: 12px; }
+  summary { font-weight: 800; cursor: pointer; }
+  details p { margin: 10px 0 0; color: var(--muted); }
+
+  .final { text-align: center; }
+  .final h2 { font-size: clamp(40px, 6vw, 64px); }
+  footer { border-top: 3px solid var(--line); padding: 28px 0; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo display" href="#top">Rinen<span>Studio</span></a>
+    <nav>
+      <a href="#why">Why manga</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Free consultation</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">理念 · rinen · the philosophy a company lives by</span>
+        <h1 class="display">Your values,<br>told as <em>manga</em><br>your people actually read.</h1>
+        <p class="lead">In Japan, companies have a word for it: <strong>rinen</strong>, the philosophy behind every decision. We turn your mission, values and founder story into Japanese-style manga for onboarding and culture training.</p>
+        <div class="cta-row">
+          <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Book a free 30-min consultation</a>
+          <a class="btn ghost" href="#pricing">See pricing</a>
+        </div>
+      </div>
+      <div class="page" aria-hidden="true">
+        <div class="panel p1 tone"><span class="caption">Day 1</span><br><span class="bubble">“Our values are… on a poster somewhere?”</span></div>
+        <div class="panel p2"><span class="bubble">“Why did the founder start this?”</span><span class="sfx display">?!</span></div>
+        <div class="panel p3"><div class="speed"></div><span class="bubble">“Oh — <em>that’s</em> what ‘customer first’ means here.”</span></div>
+        <div class="panel p4 tone"><strong class="display">Values people remember.</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="alt" id="problem">
+    <div class="wrap">
+      <h2 class="display">Values on the wall don’t move people.</h2>
+      <p class="sub">Most companies have carefully written values. Very few employees can tell you what those values look like on a Tuesday afternoon.</p>
+      <div class="stats">
+        <div class="card">
+          <div class="stat display">27%</div>
+          <p>of employees strongly agree they believe in their company’s values.</p>
+          <a class="src" href="https://www.gallup.com/workplace/243434/time-core-values-audit.aspx" target="_blank" rel="noopener">Source: Gallup</a>
+        </div>
+        <div class="card">
+          <div class="stat display">12%</div>
+          <p>of employees strongly agree their organization does a great job onboarding new people.</p>
+          <a class="src" href="https://www.gallup.com/workplace/247172/problems-onboarding-program.aspx" target="_blank" rel="noopener">Source: Gallup</a>
+        </div>
+        <div class="card">
+          <div class="stat display">20%</div>
+          <p>of employees worldwide are engaged at work, down for the second year in a row.</p>
+          <a class="src" href="https://www.gallup.com/file/workplace/712607/SOGW_Global-Press-Release-2026-04.pdf" target="_blank" rel="noopener">Source: Gallup, State of the Global Workplace 2026</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MANGA -->
+  <section id="why">
+    <div class="wrap">
+      <h2 class="display">Why Japanese manga?</h2>
+      <p class="sub">Manga is built to make readers feel what a character feels. That is exactly what values need.</p>
+      <div class="two">
+        <div class="card">
+          <h3>Stories, not slogans</h3>
+          <ul>
+            <li>Your values appear as <strong>real dilemmas</strong> your people face, drawn from employee interviews.</li>
+            <li>Japanese panel flow and expressive faces make emotion readable in seconds.</li>
+            <li>A 24-page manga reads in about 15 minutes, in English, on any device.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>What the research suggests</h3>
+          <ul>
+            <li>In one study, readers given a comic version of educational content scored higher on comprehension than those given text alone, when the images matched the content.</li>
+            <li>A 2023 meta-analysis of educational comics found moderate positive effects on learning and attitudes (studies were mostly in schools).</li>
+            <li>We design for discussion afterwards, which is where culture is really built.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="alt" id="how">
+    <div class="wrap">
+      <h2 class="display">How it works</h2>
+      <p class="sub">You bring the philosophy. We bring the story craft. AI handles the heavy lifting on illustration; people handle everything that matters.</p>
+      <div class="steps">
+        <div class="card step"><h3>Listen</h3><p>Interviews with founders and employees to find the moments where your values are truly tested.</p></div>
+        <div class="card step"><h3>Script</h3><p>A human-written story and panel plan. You approve the script before any art is made.</p></div>
+        <div class="card step"><h3>Draw</h3><p>AI-assisted illustration, human-edited for consistency, lettering and Japanese manga style.</p></div>
+        <div class="card step"><h3>Roll out</h3><p>Digital and print-ready files, plus discussion questions for onboarding sessions.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="wrap">
+      <h2 class="display">Simple, fixed pricing</h2>
+      <p class="sub">Clear packages, fixed revision rounds, no surprises. 50% to start, 50% on delivery.</p>
+      <div class="plans">
+        <div class="card plan">
+          <h3>Pilot</h3>
+          <div class="price display">$1,500 <small>/ project</small></div>
+          <p>One value or your founder story, 8 pages.</p>
+          <ul>
+            <li>Founder or team interview (60 min)</li>
+            <li>Script and panel plan</li>
+            <li>8 pages of English manga, digital files</li>
+            <li>1 revision round</li>
+            <li>About 2 weeks</li>
+          </ul>
+          <a class="btn ghost" href="FORM_URL" target="_blank" rel="noopener">Start with a pilot</a>
+        </div>
+        <div class="card plan featured">
+          <span class="tag">MOST POPULAR</span>
+          <h3>Culture Manga Book</h3>
+          <div class="price display">$4,800 <small>/ project</small></div>
+          <p>Mission, vision, values and origin story, 24 pages.</p>
+          <ul>
+            <li>Up to 5 interviews</li>
+            <li>24 pages of English manga</li>
+            <li>Onboarding discussion questions</li>
+            <li>Digital and print-ready PDF</li>
+            <li>2 revision rounds</li>
+            <li>About 4–5 weeks</li>
+          </ul>
+          <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Book a consultation</a>
+        </div>
+        <div class="card plan">
+          <h3>Culture Rollout Kit</h3>
+          <div class="price display">$8,500 <small>/ project</small></div>
+          <p>Everything in the Book, ready for a global rollout.</p>
+          <ul>
+            <li>32 pages</li>
+            <li>One additional language</li>
+            <li>Facilitator guide for training sessions</li>
+            <li>10 social-ready excerpts for employer branding</li>
+            <li>About 6–8 weeks</li>
+          </ul>
+          <a class="btn ghost" href="FORM_URL" target="_blank" rel="noopener">Talk to us</a>
+        </div>
+      </div>
+      <p class="note">Prices in USD, excluding printing and shipping. Japanese headquarters with overseas teams: we also work in Japanese. 日本語でのご相談も承ります。</p>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="alt" id="work">
+    <div class="wrap portfolio">
+      <div>
+        <h2 class="display">See our manga</h2>
+        <p class="sub">Our published manga is available on Kindle. Sample pages from client projects are shared on request, with permission.</p>
+        <a class="btn" href="KINDLE_URL" target="_blank" rel="noopener">Read on Kindle</a>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Honest about AI</h3>
+        <p>We use AI image tools to illustrate, which keeps projects fast and affordable. Every story, script, panel layout and final edit is done by a person. We will tell you exactly which tools we use, and our contract explains how rights work for AI-assisted art.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="display">FAQ</h2>
+      <details>
+        <summary>Who owns the manga?</summary>
+        <p>You do, to the fullest extent the law allows. We transfer rights to everything people create: the story, script, panel layout and edits. Under current US Copyright Office guidance, purely AI-generated images may not be protected by copyright on their own. We explain this clearly in the contract before you sign.</p>
+      </details>
+      <details>
+        <summary>Will it look like our company?</summary>
+        <p>Yes. We base characters and scenes on your workplace (office, factory floor, store, field) and your real situations. We never copy existing manga characters or depict real people without written consent.</p>
+      </details>
+      <details>
+        <summary>Will employees find it cheesy?</summary>
+        <p>Not if it is honest. We build stories from real employee interviews, with characters who struggle and make mistakes, rather than perfect heroes reciting slogans.</p>
+      </details>
+      <details>
+        <summary>Is my information kept confidential?</summary>
+        <p>Yes. We sign an NDA on request and only put your materials into AI tools with your consent.</p>
+      </details>
+      <details>
+        <summary>Can you do other languages?</summary>
+        <p>English is standard. The Rollout Kit includes one more language, and Japanese is always available.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="alt final">
+    <div class="wrap">
+      <h2 class="display">Let your philosophy be read.</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto">Tell us about your values. In a free 30-minute call, we will sketch the story your manga could tell.</p>
+      <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Book a free consultation</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rinen Studio. Japanese-style manga for company culture.</span>
+    <span>Made in Japan 🇯🇵</span>
+  </div>
+</footer>
+
+</body>
+</html>
