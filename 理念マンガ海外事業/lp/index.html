@@ -157,6 +157,21 @@
   .plan li { margin-bottom: 6px; font-size: 15px; }
   .note { font-size: 14px; color: var(--muted); margin-top: 18px; }
 
+  .sample-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .sample-grid { grid-template-columns: repeat(2, 1fr); } }
+  .sp {
+    margin: 0; position: relative; aspect-ratio: 2 / 3; border: 3px solid var(--line); overflow: hidden;
+    background: var(--surface) var(--tone); background-size: 6px 6px; box-shadow: 4px 4px 0 var(--line);
+  }
+  .sp::before { content: "Coming soon"; position: absolute; inset: 0 0 34px; display: grid; place-items: center; font-family: Bangers, Impact, sans-serif; font-size: 22px; color: var(--muted); }
+  .sp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sp figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 3px solid var(--line);
+    padding: 6px 10px; font-weight: 700; font-size: 14px;
+  }
+  .sp figcaption b { color: var(--accent); margin-right: 6px; }
+  .pull { font-size: clamp(24px, 3.4vw, 34px); line-height: 1.15; margin: 36px 0 12px; padding-left: 18px; border-left: 6px solid var(--accent); }
+
   .portfolio { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: center; }
   @media (max-width: 760px) { .portfolio { grid-template-columns: 1fr; } }
 
@@ -176,6 +191,7 @@
   <div class="wrap">
     <a class="logo display" href="#top">Rinen<span>Studio</span></a>
     <nav>
+      <a href="#sample">Sample</a>
       <a href="#why">Why manga</a>
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
@@ -232,8 +248,33 @@
     </div>
   </section>
 
+  <!-- SAMPLE: founder's own story -->
+  <section id="sample">
+    <div class="wrap">
+      <span class="kicker">Sample · 8 pages · the same format as our Pilot</span>
+      <h2 class="display" style="margin-top:14px">We started with our own failure.</h2>
+      <p class="sub">Our founder went from a burned-out expat in Hong Kong to an ultra-trail runner after 40, and then dropped out of one of Japan’s toughest mountain races. This is that story, told the way we would tell yours.</p>
+      <div class="sample-grid">
+        <figure class="sp"><img src="sample/p1.webp" alt="Page 1: Hong Kong, 2017" loading="lazy" onerror="this.remove()"><figcaption><b>1</b> Hong Kong, 2017</figcaption></figure>
+        <figure class="sp"><img src="sample/p2.webp" alt="Page 2: The first kilometer" loading="lazy" onerror="this.remove()"><figcaption><b>2</b> The first kilometer</figcaption></figure>
+        <figure class="sp"><img src="sample/p3.webp" alt="Page 3: Small wins" loading="lazy" onerror="this.remove()"><figcaption><b>3</b> Small wins</figcaption></figure>
+        <figure class="sp"><img src="sample/p4.webp" alt="Page 4: The start line" loading="lazy" onerror="this.remove()"><figcaption><b>4</b> The start line</figcaption></figure>
+        <figure class="sp"><img src="sample/p5.webp" alt="Page 5: Night on the ridge" loading="lazy" onerror="this.remove()"><figcaption><b>5</b> Night on the ridge</figcaption></figure>
+        <figure class="sp"><img src="sample/p6.webp" alt="Page 6: Did Not Finish" loading="lazy" onerror="this.remove()"><figcaption><b>6</b> Did Not Finish</figcaption></figure>
+        <figure class="sp"><img src="sample/p7.webp" alt="Page 7: The morning after" loading="lazy" onerror="this.remove()"><figcaption><b>7</b> The morning after</figcaption></figure>
+        <figure class="sp"><img src="sample/p8.webp" alt="Page 8: What it taught me" loading="lazy" onerror="this.remove()"><figcaption><b>8</b> What it taught me</figcaption></figure>
+      </div>
+      <blockquote class="pull display">“Finishing is only one kind of result. What matters is what you learn, and getting back up with your friends.”</blockquote>
+      <p class="sub" style="margin-bottom:0"><strong>Every company has a DNF story. That’s where your values really live.</strong></p>
+      <div class="cta-row">
+        <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Let’s draw yours</a>
+        <a class="btn ghost" href="KINDLE_URL" target="_blank" rel="noopener">Read the book: Run After 40</a>
+      </div>
+    </div>
+  </section>
+
   <!-- WHY MANGA -->
-  <section id="why">
+  <section class="alt" id="why">
     <div class="wrap">
       <h2 class="display">Why Japanese manga?</h2>
       <p class="sub">Manga is built to make readers feel what a character feels. That is exactly what values need.</p>
@@ -259,7 +300,7 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="alt" id="how">
+  <section id="how">
     <div class="wrap">
       <h2 class="display">How it works</h2>
       <p class="sub">You bring the philosophy. We bring the story craft. AI handles the heavy lifting on illustration; people handle everything that matters.</p>
@@ -273,7 +314,7 @@
   </section>
 
   <!-- PRICING -->
-  <section id="pricing">
+  <section class="alt" id="pricing">
     <div class="wrap">
       <h2 class="display">Simple, fixed pricing</h2>
       <p class="sub">Clear packages, fixed revision rounds, no surprises. 50% to start, 50% on delivery.</p>
@@ -325,11 +366,11 @@
   </section>
 
   <!-- PORTFOLIO -->
-  <section class="alt" id="work">
+  <section id="work">
     <div class="wrap portfolio">
       <div>
         <h2 class="display">See our manga</h2>
-        <p class="sub">Our published manga is available on Kindle. Sample pages from client projects are shared on request, with permission.</p>
+        <p class="sub">Our founder’s book, <em>Run After 40</em>, is available on Kindle. Sample pages from client projects are shared on request, with permission.</p>
         <a class="btn" href="KINDLE_URL" target="_blank" rel="noopener">Read on Kindle</a>
       </div>
       <div class="card">
@@ -340,7 +381,7 @@
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
+  <section class="alt" id="faq">
     <div class="wrap">
       <h2 class="display">FAQ</h2>
       <details>
@@ -367,7 +408,7 @@
   </section>
 
   <!-- FINAL CTA -->
-  <section class="alt final">
+  <section class="final">
     <div class="wrap">
       <h2 class="display">Let your philosophy be read.</h2>
       <p class="sub" style="margin-left:auto;margin-right:auto">Tell us about your values. In a free 30-minute call, we will sketch the story your manga could tell.</p>
