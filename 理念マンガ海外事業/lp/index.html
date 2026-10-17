@@ -8,6 +8,8 @@
 <meta property="og:title" content="Rinen Studio — Your company philosophy, as manga">
 <meta property="og:description" content="Japanese-style manga that helps employees understand, remember and talk about your values.">
 <meta property="og:type" content="website">
+<link rel="alternate" hreflang="en" href="./">
+<link rel="alternate" hreflang="ja" href="ja/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -71,7 +73,10 @@
   .logo span { color: var(--accent); }
   nav a { margin-left: 20px; text-decoration: none; font-weight: 600; font-size: 15px; }
   nav a:hover { color: var(--accent); }
-  @media (max-width: 720px) { nav a:not(.btn) { display: none; } }
+  nav { display: flex; align-items: center; }
+  nav a { white-space: nowrap; }
+  .lang { border: 2px solid var(--line); padding: 2px 8px; font-size: 13px; }
+  @media (max-width: 720px) { nav a:not(.btn):not(.lang) { display: none; } nav a { margin-left: 10px; } nav .btn { font-size: 13px; padding: 6px 10px; } .logo { font-size: 22px; } }
 
   .btn {
     display: inline-block; background: var(--accent); color: var(--accent-ink);
@@ -196,6 +201,7 @@
       <a href="#how">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
+      <a class="lang" href="ja/" hreflang="ja" lang="ja">日本語</a>
       <a class="btn" href="FORM_URL" target="_blank" rel="noopener">Free consultation</a>
     </nav>
   </div>
@@ -361,7 +367,7 @@
           <a class="btn ghost" href="FORM_URL" target="_blank" rel="noopener">Talk to us</a>
         </div>
       </div>
-      <p class="note">Prices in USD, excluding printing and shipping. Japanese headquarters with overseas teams: we also work in Japanese. 日本語でのご相談も承ります。</p>
+      <p class="note">Prices in USD, excluding printing and shipping. Japanese headquarters with overseas teams: we also work in Japanese. <a href="ja/" lang="ja">日本語でのご相談はこちら</a>。</p>
     </div>
   </section>
 

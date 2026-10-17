@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rinen Studio｜理念マンガ 英語版</title>
+<meta name="description" content="日本本社の企業理念を、海外拠点の社員が読める英語のマンガに。オンボーディングと理念研修でそのまま使える24ページの教材を制作します。">
+<meta property="og:title" content="Rinen Studio｜海外拠点に「理念」を届ける英語マンガ">
+<meta property="og:description" content="理念の英訳はあるのに、現地の社員に伝わらない。その差を、物語で埋めます。">
+<meta property="og:type" content="website">
+<link rel="alternate" hreflang="en" href="../">
+<link rel="alternate" hreflang="ja" href="./">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ==== 公開前に差し替える ==== */
+  /* FORM_URL  : 外部フォーム（Googleフォームなど） */
+  /* KINDLE_URL: Kindleの著者ページ、または『Run After 40』 */
+
+  :root {
+    --bg: #fbf8f3;
+    --surface: #ffffff;
+    --ink: #141414;
+    --muted: #5b5b5b;
+    --line: #141414;
+    --accent: #d7263d;
+    --accent-ink: #ffffff;
+    --soft: #f1ebe1;
+    --tone: radial-gradient(#14141422 1px, transparent 1.2px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121212;
+      --surface: #1c1c1c;
+      --ink: #f2efe9;
+      --muted: #b4b0a8;
+      --line: #f2efe9;
+      --accent: #ff4d5e;
+      --accent-ink: #121212;
+      --soft: #24221f;
+      --tone: radial-gradient(#f2efe922 1px, transparent 1.2px);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121212;
+    --surface: #1c1c1c;
+    --ink: #f2efe9;
+    --muted: #b4b0a8;
+    --line: #f2efe9;
+    --accent: #ff4d5e;
+    --accent-ink: #121212;
+    --soft: #24221f;
+    --tone: radial-gradient(#f2efe922 1px, transparent 1.2px);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.85 "Noto Sans JP", system-ui, -apple-system, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+    overflow-wrap: anywhere;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+  .display { font-family: "Dela Gothic One", "Noto Sans JP", sans-serif; font-weight: 400; letter-spacing: .01em; }
+  .latin { font-family: Bangers, Impact, sans-serif; letter-spacing: .02em; }
+
+  /* Header */
+  header { border-bottom: 3px solid var(--line); background: var(--surface); position: sticky; top: 0; z-index: 10; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
+  .logo { font-size: 28px; text-decoration: none; white-space: nowrap; }
+  .logo span { color: var(--accent); }
+  nav { display: flex; align-items: center; }
+  nav a { margin-left: 18px; text-decoration: none; font-weight: 700; font-size: 14px; white-space: nowrap; }
+  nav a:hover { color: var(--accent); }
+  .lang { border: 2px solid var(--line); padding: 2px 8px; font-size: 13px; }
+  @media (max-width: 760px) { nav a:not(.btn):not(.lang) { display: none; } nav a { margin-left: 10px; } }
+
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--accent-ink);
+    border: 3px solid var(--line); padding: 12px 22px; font-weight: 900; text-decoration: none;
+    box-shadow: 4px 4px 0 var(--line); transition: transform .1s, box-shadow .1s; line-height: 1.4;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--line); }
+  nav .btn { padding: 6px 12px; box-shadow: 3px 3px 0 var(--line); font-size: 13px; }
+  .btn.ghost { background: var(--surface); color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 56px 0 48px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .hero-grid { grid-template-columns: 1fr; } }
+  .kicker { display: inline-block; border: 2px solid var(--line); padding: 2px 10px; font-weight: 700; font-size: 13px; background: var(--surface); }
+  h1 { font-size: clamp(32px, 5.4vw, 56px); line-height: 1.25; margin: 16px 0; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { font-size: 17px; color: var(--muted); max-width: 34em; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 24px; }
+
+  .page {
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 150px 190px 130px; gap: 10px;
+    border: 3px solid var(--line); padding: 10px; background: var(--surface); transform: rotate(1.2deg);
+    box-shadow: 8px 8px 0 var(--line);
+  }
+  .panel { border: 3px solid var(--line); position: relative; overflow: hidden; background: var(--surface); padding: 12px; }
+  .panel.tone { background-image: var(--tone); background-size: 6px 6px; }
+  .p1 { grid-column: 1 / 3; }
+  .p4 { grid-column: 1 / 3; }
+  .bubble {
+    background: var(--surface); border: 2.5px solid var(--line); border-radius: 50% / 45%;
+    padding: 10px 16px; font-weight: 700; font-size: 13px; line-height: 1.4; display: inline-block; max-width: 88%;
+    position: relative;
+  }
+  .bubble::after {
+    content: ""; position: absolute; bottom: -12px; left: 28px; width: 18px; height: 14px;
+    background: var(--surface); border-right: 2.5px solid var(--line); border-bottom: 2.5px solid var(--line);
+    transform: skewX(-35deg) rotate(10deg);
+  }
+  .caption { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--bg); font-size: 12px; font-weight: 700; padding: 1px 8px; }
+  .sfx { position: absolute; right: 10px; bottom: 6px; font-size: 40px; color: var(--accent); transform: rotate(-8deg); }
+  .speed { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 70% 60%, var(--soft) 0 4deg, transparent 4deg 9deg); opacity: .9; }
+  .p1 { padding-top: 30px; }
+  .p3 .bubble, .p4 .bubble { position: relative; z-index: 1; }
+  .p3 { display: flex; align-items: flex-end; }
+  .p4 { display: flex; align-items: center; justify-content: center; text-align: center; }
+  .p4 strong { font-size: 22px; position: relative; z-index: 1; }
+
+  /* Sections */
+  section { padding: 64px 0; }
+  section.alt { background: var(--soft); border-top: 3px solid var(--line); border-bottom: 3px solid var(--line); }
+  h2 { font-size: clamp(26px, 4vw, 40px); line-height: 1.3; margin: 0 0 12px; }
+  .sub { color: var(--muted); max-width: 42em; margin: 0 0 32px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .stats { grid-template-columns: 1fr; } }
+  .card { background: var(--surface); border: 3px solid var(--line); padding: 22px; box-shadow: 5px 5px 0 var(--line); }
+  .card h3 { margin: 0 0 6px; font-size: 19px; line-height: 1.5; }
+  .stat { font-size: 52px; line-height: 1.1; color: var(--accent); }
+  .stat small { font-size: 22px; }
+  .card p { margin: 10px 0 0; }
+  .src { font-size: 12px; color: var(--muted); margin-top: 10px; display: block; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+  ul.list { padding-left: 20px; margin: 0; }
+  ul.list li { margin-bottom: 8px; }
+
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; counter-reset: s; }
+  @media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+  .step { counter-increment: s; }
+  .step::before { content: counter(s); font-family: Bangers, Impact, sans-serif; font-size: 44px; color: var(--accent); line-height: 1; display: block; }
+  .step .wk { font-size: 12px; font-weight: 700; border: 2px solid var(--line); padding: 0 6px; display: inline-block; margin-bottom: 4px; }
+  .step p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+  .offer { display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: start; }
+  @media (max-width: 860px) { .offer { grid-template-columns: 1fr; } }
+  .plan.featured { border-color: var(--accent); box-shadow: 8px 8px 0 var(--accent); }
+  .plan .tag { display: inline-block; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 900; padding: 2px 8px; margin-bottom: 8px; }
+  .price { font-size: 48px; margin: 6px 0 0; line-height: 1.2; }
+  .price small { font-family: "Noto Sans JP", sans-serif; font-size: 15px; color: var(--muted); font-weight: 700; }
+  .plan ul { padding-left: 20px; margin: 14px 0 20px; }
+  .plan li { margin-bottom: 4px; font-size: 15px; }
+  table.spec { width: 100%; border-collapse: collapse; font-size: 15px; background: var(--surface); border: 3px solid var(--line); }
+  table.spec th, table.spec td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
+  table.spec th { width: 32%; background: var(--soft); white-space: nowrap; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+
+  .sample-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .sample-grid { grid-template-columns: repeat(2, 1fr); } }
+  .sp {
+    margin: 0; position: relative; aspect-ratio: 2 / 3; border: 3px solid var(--line); overflow: hidden;
+    background: var(--surface) var(--tone); background-size: 6px 6px; box-shadow: 4px 4px 0 var(--line);
+  }
+  .sp::before { content: "Coming soon"; position: absolute; inset: 0 0 34px; display: grid; place-items: center; font-family: Bangers, Impact, sans-serif; font-size: 22px; color: var(--muted); }
+  .sp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .sp figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 3px solid var(--line);
+    padding: 4px 10px; font-weight: 700; font-size: 13px; line-height: 1.5;
+  }
+  .sp figcaption b { color: var(--accent); margin-right: 6px; }
+  .pull { font-size: clamp(20px, 2.8vw, 28px); line-height: 1.5; margin: 36px 0 12px; padding-left: 18px; border-left: 6px solid var(--accent); }
+
+  details { background: var(--surface); border: 3px solid var(--line); padding: 14px 20px; margin-bottom: 12px; }
+  summary { font-weight: 900; cursor: pointer; }
+  details p { margin: 10px 0 0; color: var(--muted); }
+
+  .final { text-align: center; }
+  .final h2 { font-size: clamp(28px, 4.6vw, 48px); }
+  footer { border-top: 3px solid var(--line); padding: 28px 0; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo latin" href="#top">Rinen<span>Studio</span></a>
+    <nav>
+      <a href="#problem">課題</a>
+      <a href="#sample">見本</a>
+      <a href="#how">制作の流れ</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a class="lang" href="../" hreflang="en" lang="en">EN</a>
+      <a class="btn" href="FORM_URL" target="_blank" rel="noopener">無料相談</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">海外拠点をお持ちの日本企業の、人事・経営企画・広報の方へ</span>
+        <h1 class="display">その理念、<br>現地の社員に<br><em>読まれて</em>いますか。</h1>
+        <p class="lead">日本本社の企業理念を、海外拠点の社員が自分ごととして読める<strong>英語のマンガ</strong>にします。創業の想いや、理念が試された場面を物語にした24ページ。オンボーディングと理念研修で、そのまま使える教材です。</p>
+        <div class="cta-row">
+          <a class="btn" href="FORM_URL" target="_blank" rel="noopener">30分の無料相談を予約する</a>
+          <a class="btn ghost" href="#sample">8ページの見本を見る</a>
+        </div>
+      </div>
+      <div class="page" aria-hidden="true">
+        <div class="panel p1 tone"><span class="caption">Day 1 · Bangkok</span><span class="bubble" lang="en">“Our philosophy is… the one in the handbook?”</span></div>
+        <div class="panel p2"><span class="bubble" lang="en">“Why did the founder start this?”</span><span class="sfx latin">?!</span></div>
+        <div class="panel p3"><div class="speed"></div><span class="bubble" lang="en">“Oh — <em>that’s</em> what ‘sanpo-yoshi’ means.”</span></div>
+        <div class="panel p4 tone"><strong class="display">訳すのではなく、伝える。</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="alt" id="problem">
+    <div class="wrap">
+      <h2 class="display">英訳はある。でも、伝わっていない。</h2>
+      <p class="sub">理念の英訳はハンドブックに載っている。朝礼でも唱和している。それでも現地の社員に聞くと、「その言葉が、自分の仕事のどの場面の話なのか」がわからない。日本語の理念は、背景にある物語と一緒でないと伝わりにくい言葉です。</p>
+      <div class="stats">
+        <div class="card">
+          <div class="stat latin">24,058<small class="display">社</small></div>
+          <p>日本企業の海外現地法人の数。従業者は約532万人。</p>
+          <span class="src">出典：経済産業省「第54回 海外事業活動基本調査」（2024年3月末時点）</span>
+        </div>
+        <div class="card">
+          <div class="stat latin">27%</div>
+          <p>自社の価値観を「強く信じている」と答えた社員の割合（米国の調査）。</p>
+          <a class="src" href="https://www.gallup.com/workplace/243434/time-core-values-audit.aspx" target="_blank" rel="noopener">出典：Gallup</a>
+        </div>
+        <div class="card">
+          <div class="stat latin">12%</div>
+          <p>自社のオンボーディングが「非常にうまくいっている」と強く思う社員の割合。</p>
+          <a class="src" href="https://www.gallup.com/workplace/247172/problems-onboarding-program.aspx" target="_blank" rel="noopener">出典：Gallup</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MANGA -->
+  <section id="why">
+    <div class="wrap">
+      <h2 class="display">なぜ、マンガなのか。</h2>
+      <p class="sub">人は、意思の力だけでは変わり続けられません。その価値観が息づく「場面」に身を置いてはじめて、言葉が腹に落ちます。マンガは、読む人をその場面に立たせることができる表現です。</p>
+      <div class="two">
+        <div class="card">
+          <h3>標語ではなく、物語で</h3>
+          <ul class="list">
+            <li>理念を、現地の社員が実際に直面する<strong>迷いの場面</strong>として描きます。</li>
+            <li>主人公は、現地の社員。日本人の創業者の話も、現地の目線で語り直します。</li>
+            <li>24ページで約15分。スマホでも読めます。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>日本語で相談でき、英語で伝わる</h3>
+          <ul class="list">
+            <li>打ち合わせ、脚本の確認、請求まで、<strong>すべて日本語</strong>で進めます。</li>
+            <li>理念の言葉は直訳せず、意味が伝わる英語に置き換えます（和英の脚本調整込み）。</li>
+            <li>英文は、ネイティブの校正を入れて仕上げます。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE -->
+  <section class="alt" id="sample">
+    <div class="wrap">
+      <span class="kicker">見本 · 英語8ページ</span>
+      <h2 class="display" style="margin-top:14px">まず、自分の失敗から描きました。</h2>
+      <p class="sub">40歳を過ぎてから走り始め、トレイルランニングに挑み、日本屈指の山岳レースで初めて途中棄権（DNF）した。代表自身のその体験を、御社の理念を描くときと同じ手順でマンガにしました。成功談よりも、失敗した場面のほうが、その人の大事にしているものがはっきり出ます。</p>
+      <div class="sample-grid">
+        <figure class="sp"><img src="../sample/p1.webp" alt="1ページ目：香港、2017年" loading="lazy" onerror="this.remove()"><figcaption><b>1</b> 香港、2017年</figcaption></figure>
+        <figure class="sp"><img src="../sample/p2.webp" alt="2ページ目：最初の1キロ" loading="lazy" onerror="this.remove()"><figcaption><b>2</b> 最初の1キロ</figcaption></figure>
+        <figure class="sp"><img src="../sample/p3.webp" alt="3ページ目：積み重ね" loading="lazy" onerror="this.remove()"><figcaption><b>3</b> 積み重ね</figcaption></figure>
+        <figure class="sp"><img src="../sample/p4.webp" alt="4ページ目：スタート" loading="lazy" onerror="this.remove()"><figcaption><b>4</b> スタート</figcaption></figure>
+        <figure class="sp"><img src="../sample/p5.webp" alt="5ページ目：夜の稜線" loading="lazy" onerror="this.remove()"><figcaption><b>5</b> 夜の稜線</figcaption></figure>
+        <figure class="sp"><img src="../sample/p6.webp" alt="6ページ目：途中棄権" loading="lazy" onerror="this.remove()"><figcaption><b>6</b> 途中棄権</figcaption></figure>
+        <figure class="sp"><img src="../sample/p7.webp" alt="7ページ目：翌朝" loading="lazy" onerror="this.remove()"><figcaption><b>7</b> 翌朝</figcaption></figure>
+        <figure class="sp"><img src="../sample/p8.webp" alt="8ページ目：学んだこと" loading="lazy" onerror="this.remove()"><figcaption><b>8</b> 学んだこと</figcaption></figure>
+      </div>
+      <blockquote class="pull display">「完走は、結果の一つにすぎない。大事なのは、そこから学び、仲間と立ち上がること。」</blockquote>
+      <p class="sub" style="margin-bottom:0"><strong>どの会社にも、理念が試された「あの日」があります。そこに、理念の本当の姿があります。</strong></p>
+      <div class="cta-row">
+        <a class="btn" href="FORM_URL" target="_blank" rel="noopener">御社の「あの日」を相談する</a>
+        <a class="btn ghost" href="KINDLE_URL" target="_blank" rel="noopener">原作『Run After 40』（Kindle）</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <h2 class="display">制作の流れ（約5週間）</h2>
+      <p class="sub">物語と脚本は人が書き、作画はAIを使って人が仕上げます。脚本をご承認いただくまで、作画には進みません。</p>
+      <div class="steps">
+        <div class="card step"><span class="wk">1週目</span><h3>ヒアリング</h3><p>創業者・経営陣、現地の社員の方へのインタビュー。理念が試された場面を探します。</p></div>
+        <div class="card step"><span class="wk">2週目</span><h3>脚本（日英）</h3><p>日本語で脚本を確認いただき、英語版を作成。理念の言葉の訳し方もここで決めます。</p></div>
+        <div class="card step"><span class="wk">3週目</span><h3>ネーム</h3><p>コマ割りと構図の下書き。誰が何を言うかを、絵になる前に確認できます。</p></div>
+        <div class="card step"><span class="wk">4週目</span><h3>作画・文字入れ</h3><p>AIで作画し、絵柄の統一、表情、英語の文字入れを人が仕上げます。</p></div>
+        <div class="card step"><span class="wk">5週目</span><h3>修正・納品</h3><p>修正2回まで。研修で使える「話し合いの問い」と一緒に納品します。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="alt" id="pricing">
+    <div class="wrap">
+      <h2 class="display">料金</h2>
+      <p class="sub">追加費用が出ない、固定の料金です。着手時に50%、納品時に50%をお支払いいただきます。</p>
+      <div class="offer">
+        <div class="card plan featured">
+          <span class="tag">日本企業向け</span>
+          <h3>理念マンガ 英語版</h3>
+          <div class="price latin">¥800,000 <small>税別</small></div>
+          <ul>
+            <li>英語マンガ 24ページ</li>
+            <li>和英の脚本調整、ネイティブ校正込み</li>
+            <li>インタビュー 最大5回（オンライン可）</li>
+            <li>研修用「話し合いの問い」</li>
+            <li>修正2回</li>
+            <li>納期 約5週間</li>
+          </ul>
+          <a class="btn" href="FORM_URL" target="_blank" rel="noopener">無料相談を予約する</a>
+        </div>
+        <div>
+          <table class="spec">
+            <tr><th>納品物</th><td>Web・スマホ用の画像、PDF（社内ポータル掲載用）、印刷用PDF</td></tr>
+            <tr><th>対応言語</th><td>英語（標準）。日本語版も作れます</td></tr>
+            <tr><th>やりとり</th><td>すべて日本語。現地の方へのインタビューは英語で行います</td></tr>
+            <tr><th>お支払い</th><td>着手時50%・納品時50%、銀行振込</td></tr>
+            <tr><th>秘密保持</th><td>ご希望に応じてNDAを締結します</td></tr>
+          </table>
+          <p class="note">印刷・製本・配送の費用は含みません。日本国内の法人へのご請求には、消費税（10%）を別途いただきます。英語圏の企業向けプラン（8ページのパイロットなど）は<a href="../#pricing">英語版のページ</a>をご覧ください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <h2 class="display">よくある質問</h2>
+      <details>
+        <summary>完成したマンガの権利はどうなりますか？</summary>
+        <p>人が作った部分（物語、脚本、コマ割り、編集、文字入れ）の権利は、法律上可能な範囲ですべて御社に移転します。AIだけで生成した画像は、国によっては著作権の保護を受けられない場合があります。この点は契約前に書面でご説明します。</p>
+      </details>
+      <details>
+        <summary>AIを使うと、絵の質や情報管理は大丈夫ですか？</summary>
+        <p>作画にはAIを使いますが、物語、脚本、構図、最終の仕上げはすべて人が行います。使うツールは事前にお伝えし、御社の資料をAIツールに入れるのは、同意をいただいた範囲だけです。</p>
+      </details>
+      <details>
+        <summary>うちの会社らしい絵になりますか？</summary>
+        <p>はい。現地の職場（オフィス、工場、店舗など）と実際の場面をもとに、登場人物と背景を作ります。既存のマンガのキャラクターを真似たり、実在の人物を同意なく描いたりすることはありません。</p>
+      </details>
+      <details>
+        <summary>現地の社員に「子どもっぽい」と思われませんか？</summary>
+        <p>理想のヒーローが標語を語る話にはしません。インタビューをもとに、迷い、失敗する登場人物を描きます。正直な物語ほど、大人の社員にも読まれます。</p>
+      </details>
+      <details>
+        <summary>英語以外の言語にも対応できますか？</summary>
+        <p>英語が標準です。ほかの言語はご相談ください。</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="alt final">
+    <div class="wrap">
+      <h2 class="display">理念を、読まれるものに。</h2>
+      <p class="sub" style="margin-left:auto;margin-right:auto">30分の無料相談で、御社の理念と海外拠点の状況を伺い、マンガにするならどんな物語になるかを一緒に考えます。</p>
+      <a class="btn" href="FORM_URL" target="_blank" rel="noopener">無料相談を予約する</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rinen Studio（運営：Fumitaka Momose）</span>
+    <span><a href="../" hreflang="en" lang="en">English</a> · Made in Japan 🇯🇵</span>
+  </div>
+</footer>
+
+</body>
+</html>
