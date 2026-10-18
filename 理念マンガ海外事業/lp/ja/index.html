@@ -180,16 +180,37 @@
   .sample-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 760px) { .sample-grid { grid-template-columns: repeat(2, 1fr); } }
   .sp {
-    margin: 0; position: relative; aspect-ratio: 2 / 3; border: 3px solid var(--line); overflow: hidden;
-    background: var(--surface) var(--tone); background-size: 6px 6px; box-shadow: 4px 4px 0 var(--line);
+    margin: 0; position: relative; border: 3px solid var(--line); overflow: hidden;
+    background: var(--surface); box-shadow: 4px 4px 0 var(--line); display: flex; flex-direction: column;
   }
-  .sp::before { content: "Coming soon"; position: absolute; inset: 0 0 34px; display: grid; place-items: center; font-family: Bangers, Impact, sans-serif; font-size: 22px; color: var(--muted); }
-  .sp img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .sp figcaption {
-    position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 3px solid var(--line);
-    padding: 4px 10px; font-weight: 700; font-size: 13px; line-height: 1.5;
-  }
+  .sp::before { content: "Coming soon"; aspect-ratio: 2 / 3; display: grid; place-items: center; font-family: Bangers, Impact, sans-serif; font-size: 22px; color: var(--muted); background: var(--tone); background-size: 6px 6px; }
+  .sp:has(img)::before { display: none; }
+  .sp img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+  .sp:has(img) { cursor: zoom-in; transition: transform .1s, box-shadow .1s; }
+  .sp:has(img):hover, .sp:has(img):focus-visible { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--line); outline: none; }
+  .sp figcaption { border-top: 3px solid var(--line); padding: 6px 10px; font-weight: 700; font-size: 14px; line-height: 1.4; }
   .sp figcaption b { color: var(--accent); margin-right: 6px; }
+  .read-hint { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+
+  /* Reader (click a page to read it full size) */
+  .reader { padding: 0; border: 0; background: transparent; max-width: none; max-height: none; width: 100vw; height: 100dvh; margin: 0; }
+  .reader::backdrop { background: rgba(10, 10, 10, .92); }
+  .reader-inner { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 52px 64px 16px; box-sizing: border-box; }
+  .reader img { max-width: 100%; max-height: calc(100dvh - 110px); width: auto; height: auto; border: 3px solid #f2efe9; background: #fff; touch-action: pan-y pinch-zoom; }
+  .reader-count { color: #f2efe9; font-weight: 700; font-size: 14px; }
+  .reader button { position: absolute; background: #f2efe9; color: #141414; border: 3px solid #141414; font: 800 22px/1 system-ui, sans-serif; width: 48px; height: 48px; cursor: pointer; box-shadow: 3px 3px 0 #d7263d; }
+  .reader button:hover { background: #fff; }
+  .reader button:disabled { opacity: .35; cursor: default; }
+  .reader .r-close { top: 10px; right: 10px; }
+  .reader .r-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+  .reader .r-next { right: 8px; top: 50%; transform: translateY(-50%); }
+  @media (max-width: 600px) {
+    .reader-inner { padding: 56px 8px 72px; }
+    .reader img { max-height: calc(100dvh - 140px); }
+    .reader .r-prev, .reader .r-next { top: auto; bottom: 12px; transform: none; }
+    .reader .r-prev { left: calc(50% - 60px); }
+    .reader .r-next { right: calc(50% - 60px); }
+  }
   .pull { font-size: clamp(20px, 2.8vw, 28px); line-height: 1.5; margin: 36px 0 12px; padding-left: 18px; border-left: 6px solid var(--accent); }
 
   details { background: var(--surface); border: 3px solid var(--line); padding: 14px 20px; margin-bottom: 12px; }
@@ -309,6 +330,7 @@
         <figure class="sp"><img src="../sample/p7.webp" alt="7ページ目：翌朝" loading="lazy" onerror="this.remove()"><figcaption><b>7</b> 翌朝</figcaption></figure>
         <figure class="sp"><img src="../sample/p8.webp" alt="8ページ目：学んだこと" loading="lazy" onerror="this.remove()"><figcaption><b>8</b> 学んだこと</figcaption></figure>
       </div>
+      <p class="read-hint">ページをクリックすると大きく読めます。矢印かスワイプでページをめくれます。</p>
       <blockquote class="pull display">「完走は、結果の一つにすぎない。大事なのは、そこから学び、仲間と立ち上がること。」</blockquote>
       <p class="sub" style="margin-bottom:0"><strong>どの会社にも、理念が試された「あの日」があります。そこに、理念の本当の姿があります。</strong></p>
       <div class="cta-row">
@@ -433,6 +455,68 @@
     <span><a href="../" hreflang="en" lang="en">English</a> · Made in Japan 🇯🇵</span>
   </div>
 </footer>
+
+
+<dialog class="reader" id="reader" aria-label="サンプル漫画を読む">
+  <div class="reader-inner">
+    <img id="reader-img" alt="">
+    <span class="reader-count" id="reader-count" aria-live="polite"></span>
+    <button type="button" class="r-close" aria-label="閉じる">×</button>
+    <button type="button" class="r-prev" aria-label="前のページ">‹</button>
+    <button type="button" class="r-next" aria-label="次のページ">›</button>
+  </div>
+</dialog>
+<script>
+(() => {
+  const dlg = document.getElementById("reader");
+  const img = document.getElementById("reader-img");
+  const count = document.getElementById("reader-count");
+  const prev = dlg.querySelector(".r-prev"), next = dlg.querySelector(".r-next");
+  if (!dlg.showModal) return;
+  const pages = () => [...document.querySelectorAll(".sp img")];
+  let i = 0, x0 = null;
+  function show(n) {
+    const list = pages();
+    if (!list.length) return;
+    i = Math.max(0, Math.min(n, list.length - 1));
+    img.src = list[i].currentSrc || list[i].src;
+    img.alt = list[i].alt;
+    count.textContent = (i + 1) + " / " + list.length;
+    prev.disabled = i === 0;
+    next.disabled = i === list.length - 1;
+    if (list[i + 1]) new Image().src = list[i + 1].src;
+  }
+  document.querySelectorAll(".sp").forEach((fig) => {
+    const open = () => {
+      const list = pages(), im = fig.querySelector("img");
+      if (!im) return;
+      show(list.indexOf(im));
+      dlg.showModal();
+    };
+    if (fig.querySelector("img")) {
+      fig.tabIndex = 0;
+      fig.setAttribute("role", "button");
+      fig.setAttribute("aria-label", "大きく読む：" + fig.querySelector("img").alt);
+    }
+    fig.addEventListener("click", open);
+    fig.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+  });
+  prev.addEventListener("click", () => show(i - 1));
+  next.addEventListener("click", () => show(i + 1));
+  dlg.querySelector(".r-close").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.classList.contains("reader-inner")) dlg.close(); });
+  dlg.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") show(i + 1);
+    if (e.key === "ArrowLeft") show(i - 1);
+  });
+  img.addEventListener("pointerdown", (e) => { x0 = e.clientX; });
+  img.addEventListener("pointerup", (e) => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) show(i + (dx < 0 ? 1 : -1));
+  });
+})();
+</script>
 
 </body>
 </html>
