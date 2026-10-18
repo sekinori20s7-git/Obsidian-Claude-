@@ -166,6 +166,16 @@
   table.spec th, table.spec td { border-bottom: 1px solid var(--line); padding: 10px 12px; text-align: left; vertical-align: top; }
   table.spec th { width: 32%; background: var(--soft); white-space: nowrap; }
   .note { font-size: 13px; color: var(--muted); margin-top: 14px; }
+  .was { font-size: .5em; color: var(--muted); text-decoration: line-through; margin-right: 6px; }
+  .launch { border-color: var(--accent); box-shadow: 6px 6px 0 var(--accent); margin-bottom: 28px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+  .launch strong { font-size: 19px; }
+  .launch .spots { background: var(--accent); color: var(--accent-ink); font-weight: 900; font-size: 13px; padding: 0 10px; }
+  .launch p { margin: 0; flex-basis: 100%; color: var(--muted); font-size: 15px; }
+  .promise { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 28px; }
+  @media (max-width: 760px) { .promise { grid-template-columns: 1fr; } }
+  .promise p { margin: 0; font-size: 15px; color: var(--muted); }
+  .hero-offer { margin-top: 14px; font-size: 14px; font-weight: 700; }
+  .hero-offer b { color: var(--accent); }
 
   .sample-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
   @media (max-width: 760px) { .sample-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -221,6 +231,7 @@
           <a class="btn" href="FORM_URL" target="_blank" rel="noopener">30分の無料相談を予約する</a>
           <a class="btn ghost" href="#sample">8ページの見本を見る</a>
         </div>
+        <p class="hero-offer"><b>立ち上げ特典：</b>先着5社さま 半額 · ご満足いただけなければ全額返金</p>
       </div>
       <div class="page" aria-hidden="true">
         <div class="panel p1 tone"><span class="caption">Day 1 · Bangkok</span><span class="bubble" lang="en">“Our philosophy is… the one in the handbook?”</span></div>
@@ -327,11 +338,16 @@
     <div class="wrap">
       <h2 class="display">料金</h2>
       <p class="sub">追加費用が出ない、固定の料金です。着手時に50%、納品時に50%をお支払いいただきます。</p>
+      <div class="card launch">
+        <strong>立ち上げ特典：先着5社さまは半額です。</strong>
+        <span class="spots">残り 5社 / 5社</span>
+        <p>事業を始めたばかりで、最初の事例づくりを優先しています。そのため、最初にご契約いただく5社さまは半額でお受けします。その代わりに、率直なご感想をいただくことと、仕上がりにご満足いただけた場合は事例として紹介させていただくことをお願いしています。</p>
+      </div>
       <div class="offer">
         <div class="card plan featured">
           <span class="tag">日本企業向け</span>
           <h3>理念マンガ 英語版</h3>
-          <div class="price latin">¥800,000 <small>税別</small></div>
+          <div class="price latin"><s class="was">¥800,000</s>¥400,000 <small>税別</small></div>
           <ul>
             <li>英語マンガ 24ページ</li>
             <li>和英の脚本調整、ネイティブ校正込み</li>
@@ -350,7 +366,17 @@
             <tr><th>お支払い</th><td>着手時50%・納品時50%、銀行振込</td></tr>
             <tr><th>秘密保持</th><td>ご希望に応じてNDAを締結します</td></tr>
           </table>
-          <p class="note">印刷・製本・配送の費用は含みません。日本国内の法人へのご請求には、消費税（10%）を別途いただきます。英語圏の企業向けプラン（8ページのパイロットなど）は<a href="../#pricing">英語版のページ</a>をご覧ください。</p>
+          <div class="promise">
+        <div class="card">
+          <h3>ご満足いただけなければ全額返金</h3>
+          <p>仕上がりにご満足いただけない場合は、納品から14日以内にお知らせください。お支払いいただいた全額をお返しします。</p>
+        </div>
+        <div class="card">
+          <h3>修正は2回まで</h3>
+          <p>セリフ、表情、コマの細部、ページの順番などの修正を2回まで承ります。作画の前に脚本をご承認いただくので、物語の中身はその段階で固まります。承認後に、まったく別の物語へ作り直すことはお受けしていません（別のご依頼としてお見積もりします）。</p>
+        </div>
+      </div>
+      <p class="note">半額は、先着5社さまのご契約に適用します（打ち消し線が通常価格です）。印刷・製本・配送の費用は含みません。日本国内の法人へのご請求には、消費税（10%）を別途いただきます。英語圏の企業向けプラン（8ページのパイロットなど）は<a href="../#pricing">英語版のページ</a>をご覧ください。</p>
         </div>
       </div>
     </div>
@@ -360,6 +386,14 @@
   <section id="faq">
     <div class="wrap">
       <h2 class="display">よくある質問</h2>
+      <details>
+        <summary>仕上がりが気に入らなかったら、どうなりますか？</summary>
+        <p>全額をお返しします。納品から14日以内にお知らせいただければ、お支払いいただいた全額を返金します。返金後は、納品データのご利用をお控えください。</p>
+      </details>
+      <details>
+        <summary>修正はどこまでできますか？</summary>
+        <p>作画が終わった後に、セリフ、表情、コマの細部、ページの順番などの修正を2回まで承ります。作画の前には脚本をご確認いただき、その段階では納得いくまで直せます。ただし、承認いただいた物語を、作画の後でまったく別の物語に差し替えることは料金の範囲外です。その場合は、新しいご依頼としてお見積もりします。</p>
+      </details>
       <details>
         <summary>完成したマンガの権利はどうなりますか？</summary>
         <p>人が作った部分（物語、脚本、コマ割り、編集、文字入れ）の権利は、法律上可能な範囲ですべて御社に移転します。AIだけで生成した画像は、国によっては著作権の保護を受けられない場合があります。この点は契約前に書面でご説明します。</p>
