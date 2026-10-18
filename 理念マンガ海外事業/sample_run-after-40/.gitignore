@@ -1,0 +1,4 @@
+# 生成画像の原本（PNG・計約50MB）はGitに入れない。LP用のWebPは ../lp/sample/ にある
+test/
+lettered/
+__pycache__/
